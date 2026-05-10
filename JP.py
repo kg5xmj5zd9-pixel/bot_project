@@ -37,17 +37,8 @@ PRODUCT_PRICE = 6
 
 # GOODS DIR (ONLY CHANGE HERE)
 
-def get_desktop():
-    home = Path.home()
-    desktop = home / "Desktop"
-
-    if not desktop.exists():
-        desktop = home / "Рабочий стол"
-
-    return desktop
-
-
-GOODS_DIR = get_desktop() / "goods"
+BASE_DIR = Path(__file__).resolve().parent
+GOODS_DIR = BASE_DIR / "goods"
 
 USERS_DB = Path("users.json")
 
@@ -153,7 +144,7 @@ def ensure_user(user_id):
 
 def ensure_goods():
 
-    GOODS_DIR.mkdir(exist_ok=True)
+    GOODS_DIR.mkdir(parents=True, exist_ok=True)
 
 def get_goods():
 
