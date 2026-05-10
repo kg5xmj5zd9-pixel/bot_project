@@ -147,13 +147,17 @@ def ensure_goods():
     GOODS_DIR.mkdir(parents=True, exist_ok=True)
 
 def get_goods():
-
     ensure_goods()
 
-    return [
-        f for f in GOODS_DIR.iterdir()
-        if f.suffix == ".txt"
-    ]
+    if not GOODS_DIR.exists():
+        return []
+
+    goods = []
+    for f in GOODS_DIR.iterdir():
+        if f.is_file() and f.name.lower().endswith(".txt"):
+            goods.append(f)
+
+    return goods
 
 # MENU
 
